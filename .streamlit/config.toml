@@ -7,6 +7,3 @@ textColor = "#e8f5ef"
 
 [browser]
 gatherUsageStats = false
-
-[server]
-headless = false
