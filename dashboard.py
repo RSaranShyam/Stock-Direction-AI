@@ -11,6 +11,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import importlib.util
+
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
@@ -19,6 +21,7 @@ from scipy.stats import binomtest
 from sklearn.metrics import roc_auc_score
 
 ROOT = Path(__file__).resolve().parent
+CAN_TRAIN = importlib.util.find_spec("tensorflow") is not None  # False on the lightweight hosted demo
 st.set_page_config(page_title="Stock Direction AI", page_icon="📈", layout="wide", initial_sidebar_state="collapsed")
 
 UP, DOWN, IND, CYAN, AMB = "#2ee59d", "#fb7185", "#a3e635", "#2dd4bf", "#fbbf24"
@@ -378,6 +381,10 @@ def train_ui():
                 f'<div style="font-size:1.5rem;font-weight:750;margin:6px 0">{PRESETS.get(T, T)} <span class="small">({T})</span></div>'
                 f'<div class="small">One-time setup: downloads the price history from Yahoo Finance, trains the LSTM ensemble and builds its '
                 f'out-of-sample track record. Then the prediction appears here and refreshes in seconds.</div></div>', unsafe_allow_html=True)
+    if not CAN_TRAIN:
+        st.info("Training is switched off in this hosted demo (it needs TensorFlow). Pick a stock marked ✅, or run the project locally "
+                "to train any stock: see the README.")
+        return
     mode = st.radio("Training size", ["Fast · 1 model (about 2–4 min)", "Full · 3 models (about 6–12 min)"], horizontal=True)
     if st.button(f"🚀 Train {T} and predict", type="primary"):
         cmd = [sys.executable, str(ROOT / "predict_tomorrow.py"), "--ticker", T, "--train"] + (["--seeds", "1"] if mode.startswith("Fast") else [])
@@ -413,7 +420,7 @@ with tabs[0]:
     else:
         top = st.columns([4, 1])
         top[1].write("")
-        if top[1].button("↻ Refresh with latest data", width="stretch"):
+        if CAN_TRAIN and top[1].button("↻ Refresh with latest data", width="stretch"):
             try:
                 with st.spinner("Downloading the latest prices and running the model..."):
                     from src.predict import predict_latest

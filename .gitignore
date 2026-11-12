@@ -9,6 +9,6 @@ __pycache__/
 data/raw/
 data/processed/
 models/
-stocks/
+stocks/*/model/
 *.keras
 *.h5

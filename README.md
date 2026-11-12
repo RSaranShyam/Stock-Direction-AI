@@ -35,7 +35,7 @@ git clone https://github.com/RSaranShyam/stock-direction-ai.git
 cd stock-direction-ai
 python -m venv .venv
 .venv\Scripts\activate            # macOS/Linux: source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-full.txt
 streamlit run dashboard.py        # opens http://localhost:8501
 ```
 Run the whole pipeline (tests, study, final models, prediction, dashboard) with `python run_all.py`.
@@ -71,7 +71,7 @@ Options: `--force` redo all, `--ticker ^NSEI` another stock, `--quick` fast smok
 ## Quick start
 ```bash
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+pip install -r requirements-full.txt
 pytest -q                                              # 6 leakage / alignment tests must pass
 python run_experiments.py                              # real data (TCS.NS) - needs internet, ~10-20 min on CPU
 python run_experiments.py --ticker ^NSEI               # NIFTY 50 index
@@ -99,7 +99,7 @@ and a refresh button. A 'Weak' signal means P(up) is within 3 points of 50%. Not
 
 ### Dashboard (localhost)
 ```bash
-pip install streamlit        # already in requirements.txt
+pip install streamlit        # already in requirements-full.txt
 streamlit run dashboard.py   # opens http://localhost:8501
 ```
 It reads `reports/results.json` (created by `run_experiments.py`) and shows headline metrics, model comparison,

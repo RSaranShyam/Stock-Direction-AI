@@ -58,7 +58,7 @@ need = {"numpy": "numpy", "pandas": "pandas", "sklearn": "scikit-learn", "scipy"
 missing = [pip for mod, pip in need.items() if importlib.util.find_spec(mod) is None]
 if missing:
     print("Installing missing packages:", ", ".join(missing), flush=True)
-    run(["-m", "pip", "install", "-r", "requirements.txt"], "package installation")
+    run(["-m", "pip", "install", "-r", "requirements-full.txt"], "package installation")
 else:
     print("All packages present.")
 
