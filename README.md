@@ -9,6 +9,8 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-dashboard-FF4B4B?logo=streamlit&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-2ee59d)
 
+### 🚀 [**Live demo: open the dashboard**](https://stock-direction-ai-m2xfndgesxsa9hjqfsdndq.streamlit.app)
+
 </div>
 
 > **Educational machine-learning project. Not financial or trading advice.**
@@ -31,8 +33,8 @@ the result honestly, including when there is no edge.
 
 ## Quick start
 ```bash
-git clone https://github.com/RSaranShyam/stock-direction-ai.git
-cd stock-direction-ai
+git clone https://github.com/RSaranShyam/Stock-Direction-AI.git
+cd Stock-Direction-AI
 python -m venv .venv
 .venv\Scripts\activate            # macOS/Linux: source .venv/bin/activate
 python -m pip install -r requirements-full.txt
